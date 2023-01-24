@@ -8,15 +8,15 @@ class Game
   
 
   #determine winner
-def determine_winner
-  if @player1.lives == 0
-    puts "#{@player2.name} wins with a score of #{@player2.lives}/3"
-  else
-    puts "#{@player1.name} wins with a score of #{@player1.lives}/3"
+  def determine_winner
+    if @player1.lives == 0
+      puts "#{@player2.name} wins with a score of #{@player2.lives}/3"
+    else
+      puts "#{@player1.name} wins with a score of #{@player1.lives}/3"
+    end
+    puts "-----GAME OVER-----"
+    puts "Goodbye!"
   end
-  puts "-----GAME OVER-----"
-  puts "Goodbye!"
-end
 
   #switch players
   def switch_players
@@ -29,28 +29,23 @@ end
 
 
   def begin
-  while @player1.lives > 0 && @player2.lives > 0
-    puts "-----NEW TURN-----"
-    question = Question.new
-    puts "#{@current_player.name} : What does #{question.printQuestion}"
-    answer = gets.chomp.to_i
+    while @player1.lives > 0 && @player2.lives > 0
+      puts "-----NEW TURN-----"
+      question = Question.new
+      puts "#{@current_player.name} : What does #{question.printQuestion}"
+      answer = gets.chomp.to_i
   
-    if question.check_answer(question.correct_answer, answer)
-      puts "#{@current_player.name}: Yes! You are correct"
-    else
-      @current_player.lives -= 1
-      puts "#{@current_player.name} : Seriously? No!"
+      if question.check_answer(question.correct_answer, answer)
+        puts "#{@current_player.name}: Yes! You are correct"
+      else
+        @current_player.lives -= 1
+        puts "#{@current_player.name} : Seriously? No!"
+      end
+        puts "P1: #{@player1.lives}/3 vs P2: #{@player2.lives}/3 "
+        switch_players
     end
-  
-   puts "P1: #{@player1.lives}/3 vs P2: #{@player2.lives}/3 "
-   
-   switch_players
-  
+      determine_winner
   end
-
-  determine_winner
-
-end
 
 
 end
